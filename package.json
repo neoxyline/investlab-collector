@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "dev": "node --watch app.js"
+    "dev": "node --watch app.js",
+    "migrate": "node src/database/migrate.js"
   },
   "dependencies": {
     "@mathieuc/tradingview": "^3.5.2",

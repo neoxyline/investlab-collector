@@ -1,26 +1,60 @@
 import logger from "../utils/logger.js";
+import repository from "../database/repository.js";
 
 class CollectorService {
 
     async handleCandle(candle) {
 
-        logger.info({
-            event: "NEW_CANDLE",
-            symbol: candle.symbol,
-            timeframe: candle.timeframe,
-            datetime: candle.datetime,
-            close: candle.close,
-            volume: candle.volume
-        });
+        try {
 
-        // Phase 4
-        // await repository.saveCandle(candle);
+            /**
+             * ==========================
+             * GET / CREATE MARKET
+             * ==========================
+             */
+            const market = await repository.getOrCreateMarket(
+                candle.market
+            );
 
-        // Phase 5
-        // await indicatorEngine.calculate(candle);
+            /**
+             * ==========================
+             * GET / CREATE SYMBOL
+             * ==========================
+             */
+            const symbol = await repository.getOrCreateSymbol(
+                market.id,
+                candle.symbol
+            );
 
-        // Phase 6
-        // await aiEngine.process(candle);
+            /**
+             * ==========================
+             * SAVE CANDLE
+             * ==========================
+             */
+            await repository.saveCandle(
+                symbol.id,
+                candle
+            );
+
+            logger.info({
+                event: "NEW_CANDLE",
+                market: candle.market,
+                symbol: candle.symbol,
+                timeframe: candle.timeframe,
+                datetime: candle.datetime,
+                close: candle.close,
+                volume: candle.volume
+            });
+
+        } catch (err) {
+
+            logger.error({
+                event: "COLLECTOR_ERROR",
+                message: err.message,
+                stack: err.stack
+            });
+
+        }
 
     }
 

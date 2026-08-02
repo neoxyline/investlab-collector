@@ -1,29 +1,27 @@
-export default [
-    {
-        symbol: "IDX:BBCA",
-        timeframe: "D"
-    },
-    {
-        symbol: "IDX:BBRI",
-        timeframe: "D"
-    },
-    {
-        symbol: "IDX:BMRI",
-        timeframe: "D"
-    },
-    {
-        symbol: "IDX:BBNI",
-        timeframe: "D"
-    },
-    {
-        symbol: "IDX:ASII",
-        timeframe: "D"
-    },{
-        symbol: "IDX:ANTM",
-        timeframe: "D"
-    },
-    {
-        symbol: "IDX:TLKM",
-        timeframe: "D"
-    }
-];
+export default {
+
+    DEFAULT: [
+
+        {
+            symbol: "IDX:BBCA",
+                timeframes: [
+                    "15",
+                    "60",
+                    "D",
+                    "W"
+                ]                                                                                   
+        },        
+
+        {
+            symbol: "IDX:BBRI",
+            timeframe: "D"
+        },
+
+        {
+            symbol: "IDX:ANTM",
+            timeframe: "D"
+        }
+
+    ]
+
+};

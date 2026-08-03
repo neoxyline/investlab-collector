@@ -7,8 +7,11 @@ class Repository {
      * Generic Query
      * ===================================
      */
+
     async query(sql, params = []) {
+
         return postgres.query(sql, params);
+
     }
 
     /**
@@ -22,17 +25,25 @@ class Repository {
         const result = await this.query(
             `
             INSERT INTO markets (
+
                 code,
+
                 name
+
             )
+
             VALUES (
+
                 $1,
+
                 $2
+
             )
 
             ON CONFLICT (code)
 
             DO UPDATE SET
+
                 name = EXCLUDED.name
 
             RETURNING *;
@@ -178,8 +189,24 @@ class Repository {
 
             )
 
-            DO NOTHING;
-            `,
+            DO UPDATE SET
+
+                open = EXCLUDED.open,
+
+                high = EXCLUDED.high,
+
+                low = EXCLUDED.low,
+
+                close = EXCLUDED.close,
+
+                volume = EXCLUDED.volume,
+
+                source = EXCLUDED.source,
+
+                received_at = NOW();
+
+            `
+            ,
             [
                 symbolId,
                 candle.timeframe,

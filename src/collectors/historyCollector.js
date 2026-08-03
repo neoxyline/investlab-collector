@@ -1,9 +1,37 @@
 class HistoryCollector {
-  constructor() {}
 
-  collect() {
-    console.log('Collecting history data');
-  }
+    async start(watchlist) {
+
+        console.log("");
+        console.log("=================================");
+        console.log("History Collector Started");
+        console.log("=================================");
+
+        for (const stock of watchlist) {
+
+            console.log("");
+
+            console.log(
+                `Loading ${stock.symbol}...`
+            );
+
+            for (const timeframe of stock.timeframes) {
+
+                console.log(
+                    `  Timeframe ${timeframe}`
+                );
+
+                // nanti fetch history
+
+            }
+
+        }
+
+        console.log("");
+        console.log("History Collector Finished");
+
+    }
+
 }
 
-module.exports = HistoryCollector;
+export default new HistoryCollector();

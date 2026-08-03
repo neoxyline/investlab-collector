@@ -5,7 +5,11 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node --watch app.js",
-    "migrate": "node src/database/migrate.js"
+    "migrate": "node src/database/migrate.js",
+    "history": "node history.js",
+    "realtime": "node app.js realtime",
+    "indicator": "node indicator.js"
+
   },
   "dependencies": {
     "@mathieuc/tradingview": "^3.5.2",

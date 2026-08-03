@@ -1,9 +1,23 @@
+import {
+    EMA,
+    SMA,
+    RSI,
+    MACD,
+    Bollinger
+} from "../indicators/index.js";
+
 class IndicatorService {
-  constructor() {}
+  constructor() {
+    this.indicators = [EMA, SMA, RSI, MACD, Bollinger];
+  }
 
   async getIndicators() {
-    return { status: 'ok' };
+    return {
+      status: 'ok',
+      indicators: this.indicators.map((indicator) => indicator.name),
+    };
   }
 }
 
-module.exports = IndicatorService;
+export { IndicatorService };
+export default new IndicatorService();
